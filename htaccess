@@ -1,0 +1,52 @@
+# 1. Reactivar el comportamiento natural de directorios de Apache
+<IfModule mod_dir.c>
+  DirectorySlash On
+</IfModule>
+
+# 2. Desactivar la caché de LiteSpeed
+<IfModule LiteSpeed>
+  CacheLookup off
+</IfModule>
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+# 3. Forzar HTTPS de forma segura
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# 4. Forzar barra (/) al final SOLO si es un directorio físico real
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_URI} !/$
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI}/ [R=301,L]
+
+# 5. EL ESCUDO: Si es un archivo o directorio real, detener aquí y cargar normalmente
+RewriteCond %{REQUEST_FILENAME} -d [OR]
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# BEGIN YOURLS
+# 6. Tu regla intacta: Admite sufijo .qr y slash opcional al final
+RewriteRule ^([0-9a-zA-Z\-_\.]+)/?$ yourls-loader.php?keyword=$1 [L,QSA]
+# END YOURLS
+</IfModule>
+
+# 7. Forzar cabeceras Anti-Caché para evitar que los navegadores recuerden las redirecciones
+<IfModule mod_headers.c>
+  Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+  Header set Pragma "no-cache"
+  Header set Expires "0"
+  Header always set Content-Security-Policy "upgrade-insecure-requests;"
+</IfModule>
+
+# BEGIN cPanel-generated php ini directives, do not edit
+<IfModule php8_module>
+   php_value error_log "/home/linkfort/logs/php.error.log"
+   php_flag log_errors On
+</IfModule>
+<IfModule lsapi_module>
+   php_value error_log "/home/linkfort/logs/php.error.log"
+   php_flag log_errors On
+</IfModule>
+# END cPanel-generated php ini directives, do not edit
