@@ -1,0 +1,1 @@
+random-shorturls: Genera URLs cortas con cadenas de caracteres aleatorios en lugar de la secuencia numérica predeterminada.
