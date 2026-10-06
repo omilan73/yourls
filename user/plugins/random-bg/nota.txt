@@ -1,0 +1,1 @@
+random-bg: Cambia dinámicamente o personaliza el fondo visual de la pantalla de inicio de sesión / administración.
