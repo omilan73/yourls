@@ -63,7 +63,7 @@ define( 'YOURLS_COOKIEKEY', 'linkfortis_8d7f6s8df76s8df6s8df6' );
  ** YOURLS will auto encrypt plain text passwords in this file
  ** Read https://yourls.org/userpassword for more information */
 $yourls_user_passwords = [
-    'admin' => 'phpass:!2y!10!7aXyVUr6R4RQtfEhdvvPQuS2opbrHTrjUaVWJs0IyvDSWnGmTHKk.' /* Password encrypted by YOURLS */ ,
+    'admin' => 'phpass:!2y!10!WCrRjJc4VyEJv0Dd6/LEHuaU0.fXLQcX70O28/Nr7.PF2VpPx2SM.' /* Password encrypted by YOURLS */ ,
 ];
 
 /** URL shortening method: either 36 or 62
