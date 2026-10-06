@@ -1,0 +1,1 @@
+always-302: Modifica el tipo de redirección predeterminado de YOURLS a 302 Found (redirección temporal).
